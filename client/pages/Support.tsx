@@ -75,6 +75,7 @@ interface SupportTicket {
   updatedAt: Date;
   assignedTo?: string;
   attachments?: { name: string; size: number; type: string }[];
+  chatCount?: number;
 }
 
 // Sample support tickets
@@ -89,6 +90,7 @@ const sampleTickets: SupportTicket[] = [
     category: "Export Issues",
     createdAt: new Date("2024-01-15T10:30:00Z"),
     updatedAt: new Date("2024-01-15T10:30:00Z"),
+    chatCount: 5,
   },
   {
     id: "TICK-002",
@@ -101,6 +103,7 @@ const sampleTickets: SupportTicket[] = [
     createdAt: new Date("2024-01-12T14:20:00Z"),
     updatedAt: new Date("2024-01-14T09:15:00Z"),
     assignedTo: "Sarah Mitchell",
+    chatCount: 8,
   },
   {
     id: "TICK-003",
@@ -113,6 +116,7 @@ const sampleTickets: SupportTicket[] = [
     createdAt: new Date("2024-01-10T16:45:00Z"),
     updatedAt: new Date("2024-01-13T11:30:00Z"),
     assignedTo: "Technical Team",
+    chatCount: 12,
   },
   {
     id: "TICK-004",
@@ -124,6 +128,7 @@ const sampleTickets: SupportTicket[] = [
     category: "Notifications",
     createdAt: new Date("2024-01-08T08:00:00Z"),
     updatedAt: new Date("2024-01-16T09:00:00Z"),
+    chatCount: 3,
   },
 ];
 
@@ -316,6 +321,7 @@ export default function Support() {
       status: "open",
       createdAt: new Date(),
       updatedAt: new Date(),
+      chatCount: 0,
       attachments: ticketFiles.map((f) => ({
         name: f.name,
         size: f.size,
@@ -814,16 +820,34 @@ export default function Support() {
                           {formatDate(ticket.updatedAt)}
                         </TableCell>
                         <TableCell>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() =>
-                              navigate(`/chat-support/${ticket.id}`)
-                            }
-                            className="border-valasys-orange text-valasys-orange hover:bg-valasys-orange hover:text-white"
-                          >
-                            <MessageCircle className="w-4 h-4" />
-                          </Button>
+                          <div className="flex items-center gap-2">
+                            <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Badge
+                                    variant="secondary"
+                                    className="bg-blue-100 text-blue-800 border border-blue-200"
+                                  >
+                                    {ticket.chatCount || 0}
+                                  </Badge>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  {ticket.chatCount || 0} message
+                                  {ticket.chatCount !== 1 ? "s" : ""}
+                                </TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() =>
+                                navigate(`/chat-support/${ticket.id}`)
+                              }
+                              className="border-valasys-orange text-valasys-orange hover:bg-valasys-orange hover:text-white"
+                            >
+                              <MessageCircle className="w-4 h-4" />
+                            </Button>
+                          </div>
                         </TableCell>
                       </TableRow>
                     ))}
