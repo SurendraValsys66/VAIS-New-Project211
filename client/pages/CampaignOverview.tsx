@@ -1317,136 +1317,221 @@ export default function CampaignOverview() {
 
         {/* Accept Campaign Modal */}
         <Dialog open={isAcceptModalOpen} onOpenChange={setIsAcceptModalOpen}>
-          <DialogContent className="max-w-lg">
+          <DialogContent className="max-w-2xl">
             <DialogHeader>
-              <DialogTitle>Accept Campaign</DialogTitle>
+              <DialogTitle className="text-2xl">Accept Campaign</DialogTitle>
               <DialogDescription>
-                Select the lead types you want to set targets for and enter the counts.
+                Select the lead types and set your target counts for this campaign.
               </DialogDescription>
             </DialogHeader>
 
-            <div className="space-y-5 py-4">
-              {/* Lead Type Selection with Checkboxes */}
-              <div className="space-y-3">
-                {/* CS Checkbox */}
-                <div className="flex items-center gap-3">
-                  <Checkbox
-                    id="cs-checkbox"
-                    checked={selectedLeads.cs}
-                    onCheckedChange={() => toggleLeadSelection("cs")}
-                  />
-                  <Label htmlFor="cs-checkbox" className="flex-1 cursor-pointer">
-                    <span className="font-medium text-gray-900">Contact Strings (CS)</span>
-                  </Label>
-                </div>
-                {selectedLeads.cs && (
-                  <div className="ml-8">
-                    <Input
-                      type="number"
-                      min="0"
-                      placeholder="Enter your count"
-                      value={campaignCounts.cs}
-                      onChange={(e) => handleCountChange("cs", e.target.value)}
-                      className="border-gray-300"
+            <div className="py-4">
+              {/* Lead Cards Grid */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                {/* CS Card */}
+                <div
+                  className={cn(
+                    "p-4 rounded-lg border-2 cursor-pointer transition-all",
+                    selectedLeads.cs
+                      ? "border-blue-500 bg-blue-50"
+                      : "border-gray-200 bg-white hover:border-gray-300"
+                  )}
+                  onClick={() => toggleLeadSelection("cs")}
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900 text-sm">
+                        Contact Strings
+                      </h3>
+                      <p className="text-xs text-gray-600 mt-0.5">CS</p>
+                    </div>
+                    <Checkbox
+                      checked={selectedLeads.cs}
+                      onCheckedChange={() => toggleLeadSelection("cs")}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   </div>
-                )}
+                  <div className="text-2xl font-bold text-blue-600">
+                    {campaignCounts.cs}
+                  </div>
+                  {selectedLeads.cs && (
+                    <div className="mt-3">
+                      <Input
+                        type="number"
+                        min="0"
+                        placeholder="Enter your count"
+                        value={campaignCounts.cs}
+                        onChange={(e) => handleCountChange("cs", e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="border-blue-300 bg-white text-sm"
+                      />
+                    </div>
+                  )}
+                </div>
 
-                {/* MQL Checkbox */}
-                <div className="flex items-center gap-3">
-                  <Checkbox
-                    id="mql-checkbox"
-                    checked={selectedLeads.mql}
-                    onCheckedChange={() => toggleLeadSelection("mql")}
-                  />
-                  <Label htmlFor="mql-checkbox" className="flex-1 cursor-pointer">
-                    <span className="font-medium text-gray-900">Marketing Qualified Leads (MQL)</span>
-                  </Label>
-                </div>
-                {selectedLeads.mql && (
-                  <div className="ml-8">
-                    <Input
-                      type="number"
-                      min="0"
-                      placeholder="Enter your count"
-                      value={campaignCounts.mql}
-                      onChange={(e) => handleCountChange("mql", e.target.value)}
-                      className="border-gray-300"
+                {/* MQL Card */}
+                <div
+                  className={cn(
+                    "p-4 rounded-lg border-2 cursor-pointer transition-all",
+                    selectedLeads.mql
+                      ? "border-green-500 bg-green-50"
+                      : "border-gray-200 bg-white hover:border-gray-300"
+                  )}
+                  onClick={() => toggleLeadSelection("mql")}
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900 text-sm">
+                        Marketing Qualified
+                      </h3>
+                      <p className="text-xs text-gray-600 mt-0.5">MQL</p>
+                    </div>
+                    <Checkbox
+                      checked={selectedLeads.mql}
+                      onCheckedChange={() => toggleLeadSelection("mql")}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   </div>
-                )}
+                  <div className="text-2xl font-bold text-green-600">
+                    {campaignCounts.mql}
+                  </div>
+                  {selectedLeads.mql && (
+                    <div className="mt-3">
+                      <Input
+                        type="number"
+                        min="0"
+                        placeholder="Enter your count"
+                        value={campaignCounts.mql}
+                        onChange={(e) => handleCountChange("mql", e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="border-green-300 bg-white text-sm"
+                      />
+                    </div>
+                  )}
+                </div>
 
-                {/* HQL Checkbox */}
-                <div className="flex items-center gap-3">
-                  <Checkbox
-                    id="hql-checkbox"
-                    checked={selectedLeads.hql}
-                    onCheckedChange={() => toggleLeadSelection("hql")}
-                  />
-                  <Label htmlFor="hql-checkbox" className="flex-1 cursor-pointer">
-                    <span className="font-medium text-gray-900">Highly Qualified Leads (HQL)</span>
-                  </Label>
-                </div>
-                {selectedLeads.hql && (
-                  <div className="ml-8">
-                    <Input
-                      type="number"
-                      min="0"
-                      placeholder="Enter your count"
-                      value={campaignCounts.hql}
-                      onChange={(e) => handleCountChange("hql", e.target.value)}
-                      className="border-gray-300"
+                {/* HQL Card */}
+                <div
+                  className={cn(
+                    "p-4 rounded-lg border-2 cursor-pointer transition-all",
+                    selectedLeads.hql
+                      ? "border-purple-500 bg-purple-50"
+                      : "border-gray-200 bg-white hover:border-gray-300"
+                  )}
+                  onClick={() => toggleLeadSelection("hql")}
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900 text-sm">
+                        Highly Qualified
+                      </h3>
+                      <p className="text-xs text-gray-600 mt-0.5">HQL</p>
+                    </div>
+                    <Checkbox
+                      checked={selectedLeads.hql}
+                      onCheckedChange={() => toggleLeadSelection("hql")}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   </div>
-                )}
+                  <div className="text-2xl font-bold text-purple-600">
+                    {campaignCounts.hql}
+                  </div>
+                  {selectedLeads.hql && (
+                    <div className="mt-3">
+                      <Input
+                        type="number"
+                        min="0"
+                        placeholder="Enter your count"
+                        value={campaignCounts.hql}
+                        onChange={(e) => handleCountChange("hql", e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="border-purple-300 bg-white text-sm"
+                      />
+                    </div>
+                  )}
+                </div>
 
-                {/* BANT + VPI Checkbox */}
-                <div className="flex items-center gap-3">
-                  <Checkbox
-                    id="bant-vpi-checkbox"
-                    checked={selectedLeads.bantVpi}
-                    onCheckedChange={() => toggleLeadSelection("bantVpi")}
-                  />
-                  <Label htmlFor="bant-vpi-checkbox" className="flex-1 cursor-pointer">
-                    <span className="font-medium text-gray-900">BANT + VPI</span>
-                  </Label>
-                </div>
-                {selectedLeads.bantVpi && (
-                  <div className="ml-8">
-                    <Input
-                      type="number"
-                      min="0"
-                      placeholder="Enter your count"
-                      value={campaignCounts.bantVpi}
-                      onChange={(e) => handleCountChange("bantVpi", e.target.value)}
-                      className="border-gray-300"
+                {/* BANT + VPI Card */}
+                <div
+                  className={cn(
+                    "p-4 rounded-lg border-2 cursor-pointer transition-all",
+                    selectedLeads.bantVpi
+                      ? "border-amber-500 bg-amber-50"
+                      : "border-gray-200 bg-white hover:border-gray-300"
+                  )}
+                  onClick={() => toggleLeadSelection("bantVpi")}
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900 text-sm">
+                        BANT + VPI
+                      </h3>
+                      <p className="text-xs text-gray-600 mt-0.5">High Intent</p>
+                    </div>
+                    <Checkbox
+                      checked={selectedLeads.bantVpi}
+                      onCheckedChange={() => toggleLeadSelection("bantVpi")}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   </div>
-                )}
+                  <div className="text-2xl font-bold text-amber-600">
+                    {campaignCounts.bantVpi}
+                  </div>
+                  {selectedLeads.bantVpi && (
+                    <div className="mt-3">
+                      <Input
+                        type="number"
+                        min="0"
+                        placeholder="Enter your count"
+                        value={campaignCounts.bantVpi}
+                        onChange={(e) => handleCountChange("bantVpi", e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="border-amber-300 bg-white text-sm"
+                      />
+                    </div>
+                  )}
+                </div>
 
-                {/* Webinar Checkbox */}
-                <div className="flex items-center gap-3">
-                  <Checkbox
-                    id="webinar-checkbox"
-                    checked={selectedLeads.webinar}
-                    onCheckedChange={() => toggleLeadSelection("webinar")}
-                  />
-                  <Label htmlFor="webinar-checkbox" className="flex-1 cursor-pointer">
-                    <span className="font-medium text-gray-900">Webinar</span>
-                  </Label>
-                </div>
-                {selectedLeads.webinar && (
-                  <div className="ml-8">
-                    <Input
-                      type="number"
-                      min="0"
-                      placeholder="Enter your count"
-                      value={campaignCounts.webinar}
-                      onChange={(e) => handleCountChange("webinar", e.target.value)}
-                      className="border-gray-300"
+                {/* Webinar Card */}
+                <div
+                  className={cn(
+                    "p-4 rounded-lg border-2 cursor-pointer transition-all col-span-2 sm:col-span-1",
+                    selectedLeads.webinar
+                      ? "border-pink-500 bg-pink-50"
+                      : "border-gray-200 bg-white hover:border-gray-300"
+                  )}
+                  onClick={() => toggleLeadSelection("webinar")}
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900 text-sm">
+                        Webinar Attendees
+                      </h3>
+                      <p className="text-xs text-gray-600 mt-0.5">Events</p>
+                    </div>
+                    <Checkbox
+                      checked={selectedLeads.webinar}
+                      onCheckedChange={() => toggleLeadSelection("webinar")}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   </div>
-                )}
+                  <div className="text-2xl font-bold text-pink-600">
+                    {campaignCounts.webinar}
+                  </div>
+                  {selectedLeads.webinar && (
+                    <div className="mt-3">
+                      <Input
+                        type="number"
+                        min="0"
+                        placeholder="Enter your count"
+                        value={campaignCounts.webinar}
+                        onChange={(e) => handleCountChange("webinar", e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="border-pink-300 bg-white text-sm"
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
