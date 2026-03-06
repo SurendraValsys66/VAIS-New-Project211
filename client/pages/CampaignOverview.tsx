@@ -1331,7 +1331,7 @@ export default function CampaignOverview() {
 
         {/* Accept Campaign Modal */}
         <Dialog open={isAcceptModalOpen} onOpenChange={setIsAcceptModalOpen}>
-          <DialogContent className="sm:max-w-[30%]">
+          <DialogContent className="max-w-[95vw] sm:max-w-[85vw] md:max-w-[500px] lg:max-w-[30%]">
             <DialogHeader>
               <DialogTitle className="text-2xl">Accept Campaign</DialogTitle>
               <DialogDescription>
@@ -1347,7 +1347,7 @@ export default function CampaignOverview() {
                   className={cn(
                     "p-4 rounded-lg border-2 cursor-pointer transition-all",
                     selectedLeads.cs
-                      ? "border-blue-600 bg-blue-50/50"
+                      ? "border-valasys-orange bg-orange-50"
                       : "border-gray-200 bg-white hover:border-gray-300",
                     selectedLeads.cs && campaignCounts.cs > 500 && "border-red-500 bg-red-50"
                   )}
@@ -1359,7 +1359,7 @@ export default function CampaignOverview() {
                         checked={selectedLeads.cs}
                         onCheckedChange={() => toggleLeadSelection("cs")}
                         onClick={(e) => e.stopPropagation()}
-                        className="rounded-none"
+                        className="rounded-none data-[state=checked]:bg-valasys-orange data-[state=checked]:border-valasys-orange"
                       />
                       <div>
                         <h3 className="font-semibold text-gray-900 text-sm">
@@ -1370,7 +1370,7 @@ export default function CampaignOverview() {
                     </div>
                     <div className={cn(
                       "text-xl font-bold",
-                      selectedLeads.cs && campaignCounts.cs > 500 ? "text-red-600" : "text-blue-600"
+                      selectedLeads.cs && campaignCounts.cs > 500 ? "text-red-600" : "text-valasys-orange"
                     )}>
                       {campaignCounts.cs}
                     </div>
@@ -1386,7 +1386,7 @@ export default function CampaignOverview() {
                         onClick={(e) => e.stopPropagation()}
                         className={cn(
                           "bg-white text-sm",
-                          campaignCounts.cs > 500 ? "border-red-500 focus-visible:ring-red-500" : "border-blue-300"
+                          campaignCounts.cs > 500 ? "border-red-500 focus-visible:ring-red-500" : "border-orange-200 focus-visible:ring-valasys-orange"
                         )}
                       />
                       {campaignCounts.cs > 500 && (
@@ -1403,7 +1403,7 @@ export default function CampaignOverview() {
                   className={cn(
                     "p-4 rounded-lg border-2 cursor-pointer transition-all",
                     selectedLeads.mql
-                      ? "border-blue-600 bg-blue-50/50"
+                      ? "border-valasys-orange bg-orange-50"
                       : "border-gray-200 bg-white hover:border-gray-300",
                     selectedLeads.mql && campaignCounts.mql > 500 && "border-red-500 bg-red-50"
                   )}
@@ -1415,7 +1415,7 @@ export default function CampaignOverview() {
                         checked={selectedLeads.mql}
                         onCheckedChange={() => toggleLeadSelection("mql")}
                         onClick={(e) => e.stopPropagation()}
-                        className="rounded-none"
+                        className="rounded-none data-[state=checked]:bg-valasys-orange data-[state=checked]:border-valasys-orange"
                       />
                       <div>
                         <h3 className="font-semibold text-gray-900 text-sm">
@@ -1426,7 +1426,7 @@ export default function CampaignOverview() {
                     </div>
                     <div className={cn(
                       "text-xl font-bold",
-                      selectedLeads.mql && campaignCounts.mql > 500 ? "text-red-600" : "text-blue-600"
+                      selectedLeads.mql && campaignCounts.mql > 500 ? "text-red-600" : "text-valasys-orange"
                     )}>
                       {campaignCounts.mql}
                     </div>
@@ -1442,7 +1442,7 @@ export default function CampaignOverview() {
                         onClick={(e) => e.stopPropagation()}
                         className={cn(
                           "bg-white text-sm",
-                          campaignCounts.mql > 500 ? "border-red-500 focus-visible:ring-red-500" : "border-blue-300"
+                          campaignCounts.mql > 500 ? "border-red-500 focus-visible:ring-red-500" : "border-orange-200 focus-visible:ring-valasys-orange"
                         )}
                       />
                       {campaignCounts.mql > 500 && (
@@ -1459,7 +1459,7 @@ export default function CampaignOverview() {
                   className={cn(
                     "p-4 rounded-lg border-2 cursor-pointer transition-all",
                     selectedLeads.hql
-                      ? "border-blue-600 bg-blue-50/50"
+                      ? "border-valasys-orange bg-orange-50"
                       : "border-gray-200 bg-white hover:border-gray-300",
                     selectedLeads.hql && campaignCounts.hql > 500 && "border-red-500 bg-red-50"
                   )}
@@ -1471,7 +1471,7 @@ export default function CampaignOverview() {
                         checked={selectedLeads.hql}
                         onCheckedChange={() => toggleLeadSelection("hql")}
                         onClick={(e) => e.stopPropagation()}
-                        className="rounded-none"
+                        className="rounded-none data-[state=checked]:bg-valasys-orange data-[state=checked]:border-valasys-orange"
                       />
                       <div>
                         <h3 className="font-semibold text-gray-900 text-sm">
@@ -1482,7 +1482,7 @@ export default function CampaignOverview() {
                     </div>
                     <div className={cn(
                       "text-xl font-bold",
-                      selectedLeads.hql && campaignCounts.hql > 500 ? "text-red-600" : "text-blue-600"
+                      selectedLeads.hql && campaignCounts.hql > 500 ? "text-red-600" : "text-valasys-orange"
                     )}>
                       {campaignCounts.hql}
                     </div>
@@ -1498,7 +1498,7 @@ export default function CampaignOverview() {
                         onClick={(e) => e.stopPropagation()}
                         className={cn(
                           "bg-white text-sm",
-                          campaignCounts.hql > 500 ? "border-red-500 focus-visible:ring-red-500" : "border-blue-300"
+                          campaignCounts.hql > 500 ? "border-red-500 focus-visible:ring-red-500" : "border-orange-200 focus-visible:ring-valasys-orange"
                         )}
                       />
                       {campaignCounts.hql > 500 && (
@@ -1515,7 +1515,7 @@ export default function CampaignOverview() {
                   className={cn(
                     "p-4 rounded-lg border-2 cursor-pointer transition-all",
                     selectedLeads.bantVpi
-                      ? "border-blue-600 bg-blue-50/50"
+                      ? "border-valasys-orange bg-orange-50"
                       : "border-gray-200 bg-white hover:border-gray-300",
                     selectedLeads.bantVpi && campaignCounts.bantVpi > 500 && "border-red-500 bg-red-50"
                   )}
@@ -1527,7 +1527,7 @@ export default function CampaignOverview() {
                         checked={selectedLeads.bantVpi}
                         onCheckedChange={() => toggleLeadSelection("bantVpi")}
                         onClick={(e) => e.stopPropagation()}
-                        className="rounded-none"
+                        className="rounded-none data-[state=checked]:bg-valasys-orange data-[state=checked]:border-valasys-orange"
                       />
                       <div>
                         <h3 className="font-semibold text-gray-900 text-sm">
@@ -1538,7 +1538,7 @@ export default function CampaignOverview() {
                     </div>
                     <div className={cn(
                       "text-xl font-bold",
-                      selectedLeads.bantVpi && campaignCounts.bantVpi > 500 ? "text-red-600" : "text-blue-600"
+                      selectedLeads.bantVpi && campaignCounts.bantVpi > 500 ? "text-red-600" : "text-valasys-orange"
                     )}>
                       {campaignCounts.bantVpi}
                     </div>
@@ -1554,7 +1554,7 @@ export default function CampaignOverview() {
                         onClick={(e) => e.stopPropagation()}
                         className={cn(
                           "bg-white text-sm",
-                          campaignCounts.bantVpi > 500 ? "border-red-500 focus-visible:ring-red-500" : "border-blue-300"
+                          campaignCounts.bantVpi > 500 ? "border-red-500 focus-visible:ring-red-500" : "border-orange-200 focus-visible:ring-valasys-orange"
                         )}
                       />
                       {campaignCounts.bantVpi > 500 && (
@@ -1571,7 +1571,7 @@ export default function CampaignOverview() {
                   className={cn(
                     "p-4 rounded-lg border-2 cursor-pointer transition-all",
                     selectedLeads.webinar
-                      ? "border-blue-600 bg-blue-50/50"
+                      ? "border-valasys-orange bg-orange-50"
                       : "border-gray-200 bg-white hover:border-gray-300",
                     selectedLeads.webinar && campaignCounts.webinar > 500 && "border-red-500 bg-red-50"
                   )}
@@ -1583,7 +1583,7 @@ export default function CampaignOverview() {
                         checked={selectedLeads.webinar}
                         onCheckedChange={() => toggleLeadSelection("webinar")}
                         onClick={(e) => e.stopPropagation()}
-                        className="rounded-none"
+                        className="rounded-none data-[state=checked]:bg-valasys-orange data-[state=checked]:border-valasys-orange"
                       />
                       <div>
                         <h3 className="font-semibold text-gray-900 text-sm">
@@ -1594,7 +1594,7 @@ export default function CampaignOverview() {
                     </div>
                     <div className={cn(
                       "text-xl font-bold",
-                      selectedLeads.webinar && campaignCounts.webinar > 500 ? "text-red-600" : "text-blue-600"
+                      selectedLeads.webinar && campaignCounts.webinar > 500 ? "text-red-600" : "text-valasys-orange"
                     )}>
                       {campaignCounts.webinar}
                     </div>
@@ -1610,7 +1610,7 @@ export default function CampaignOverview() {
                         onClick={(e) => e.stopPropagation()}
                         className={cn(
                           "bg-white text-sm",
-                          campaignCounts.webinar > 500 ? "border-red-500 focus-visible:ring-red-500" : "border-blue-300"
+                          campaignCounts.webinar > 500 ? "border-red-500 focus-visible:ring-red-500" : "border-orange-200 focus-visible:ring-valasys-orange"
                         )}
                       />
                       {campaignCounts.webinar > 500 && (
