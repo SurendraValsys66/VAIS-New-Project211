@@ -1469,16 +1469,28 @@ export default function CampaignRequestForm() {
                           >
                             Submit Campaign Request
                           </Button>
-                          <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                            <p className="text-sm text-gray-700 font-medium mb-2">
-                              Your request will be processed by our data team.
-                            </p>
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm font-semibold text-gray-900">Estimated Processing Time</span>
+                          <div className="mt-6 p-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg border border-blue-400">
+                            <div className="space-y-3">
+                              <div className="flex items-start gap-3">
+                                <div className="flex-shrink-0 mt-0.5">
+                                  <div className="flex items-center justify-center h-8 w-8 rounded-full bg-white/20">
+                                    <Check className="w-5 h-5 text-white" />
+                                  </div>
+                                </div>
+                                <p className="text-sm font-medium text-white leading-relaxed">
+                                  Your request will be processed by our data team.
+                                </p>
+                              </div>
+
+                              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                                <p className="text-xs font-semibold text-blue-100 uppercase tracking-widest mb-2">
+                                  ⏱ Estimated Processing Time
+                                </p>
+                                <p className="text-2xl font-black text-white">
+                                  ~2 Hours
+                                </p>
+                              </div>
                             </div>
-                            <p className="text-lg font-bold text-orange-600 mt-1">
-                              ⏱ ~2 Hours
-                            </p>
                           </div>
                         </>
                       ) : (
