@@ -16,7 +16,15 @@ interface StyleState {
   textColor: string;
   fontSize: string;
   padding: string;
+  paddingTop: string;
+  paddingRight: string;
+  paddingBottom: string;
+  paddingLeft: string;
   margin: string;
+  marginTop: string;
+  marginRight: string;
+  marginBottom: string;
+  marginLeft: string;
   width: string;
   height: string;
   borderRadius: string;
@@ -40,7 +48,15 @@ export const ElementStylePanel: React.FC<ElementStylePanelProps> = ({
     textColor: "#000000",
     fontSize: "16",
     padding: "16",
+    paddingTop: "0",
+    paddingRight: "0",
+    paddingBottom: "0",
+    paddingLeft: "0",
     margin: "0",
+    marginTop: "0",
+    marginRight: "0",
+    marginBottom: "0",
+    marginLeft: "0",
     width: "100",
     height: "",
     borderRadius: "0",
@@ -72,7 +88,15 @@ export const ElementStylePanel: React.FC<ElementStylePanelProps> = ({
         textColor: component.textColor || "#000000",
         fontSize: component.fontSize ? String(component.fontSize) : "16",
         padding: component.padding ? String(component.padding) : "16",
+        paddingTop: component.paddingTop ? String(component.paddingTop) : "0",
+        paddingRight: component.paddingRight ? String(component.paddingRight) : "0",
+        paddingBottom: component.paddingBottom ? String(component.paddingBottom) : "0",
+        paddingLeft: component.paddingLeft ? String(component.paddingLeft) : "0",
         margin: component.margin ? String(component.margin) : "0",
+        marginTop: component.marginTop ? String(component.marginTop) : "0",
+        marginRight: component.marginRight ? String(component.marginRight) : "0",
+        marginBottom: component.marginBottom ? String(component.marginBottom) : "0",
+        marginLeft: component.marginLeft ? String(component.marginLeft) : "0",
         width: component.width ? String(component.width) : "100",
         height: component.height ? String(component.height) : "",
         borderRadius: component.borderRadius ? String(component.borderRadius) : "0",
@@ -423,22 +447,95 @@ export const ElementStylePanel: React.FC<ElementStylePanelProps> = ({
         <div>
           <SectionHeader title="Spacing" section="spacing" />
           {expandedSections.spacing && (
-            <>
-              <StyleInput
-                label="Padding (px)"
-                value={styles.padding}
-                onChange={(value) => handleStyleChange("padding", value)}
-                type="number"
-                placeholder="16"
-              />
-              <StyleInput
-                label="Margin (px)"
-                value={styles.margin}
-                onChange={(value) => handleStyleChange("margin", value)}
-                type="number"
-                placeholder="0"
-              />
-            </>
+            <div className="px-4 py-3">
+              {/* Padding */}
+              <div className="mb-4">
+                <label className="text-xs font-bold text-gray-700 block mb-3">Padding</label>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { key: "paddingTop", label: "⊞" },
+                    { key: "paddingRight", label: "⊞" },
+                    { key: "paddingBottom", label: "⊞" },
+                    { key: "paddingLeft", label: "⊞" },
+                  ].map(({ key, label }) => (
+                    <div key={key} className="flex gap-1 items-center">
+                      <span className="text-xs text-gray-500">{label}</span>
+                      <Input
+                        type="number"
+                        value={styles[key as keyof StyleState]}
+                        onChange={(e) => handleStyleChange(key as keyof StyleState, e.target.value)}
+                        className="w-12 text-xs h-8"
+                      />
+                      <span className="text-xs text-gray-500 w-5">px</span>
+                      <div className="flex flex-col gap-0">
+                        <button
+                          onClick={() => {
+                            const current = Number(styles[key as keyof StyleState]) || 0;
+                            handleStyleChange(key as keyof StyleState, String(current + 1));
+                          }}
+                          className="text-xs text-gray-600 hover:text-gray-900 leading-none"
+                        >
+                          ▲
+                        </button>
+                        <button
+                          onClick={() => {
+                            const current = Number(styles[key as keyof StyleState]) || 0;
+                            handleStyleChange(key as keyof StyleState, String(Math.max(0, current - 1)));
+                          }}
+                          className="text-xs text-gray-600 hover:text-gray-900 leading-none"
+                        >
+                          ▼
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Margin */}
+              <div className="border-t pt-3">
+                <label className="text-xs font-bold text-gray-700 block mb-3">Margin</label>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { key: "marginTop", label: "⊞" },
+                    { key: "marginRight", label: "⊞" },
+                    { key: "marginBottom", label: "⊞" },
+                    { key: "marginLeft", label: "⊞" },
+                  ].map(({ key, label }) => (
+                    <div key={key} className="flex gap-1 items-center">
+                      <span className="text-xs text-gray-500">{label}</span>
+                      <Input
+                        type="number"
+                        value={styles[key as keyof StyleState]}
+                        onChange={(e) => handleStyleChange(key as keyof StyleState, e.target.value)}
+                        className="w-12 text-xs h-8"
+                      />
+                      <span className="text-xs text-gray-500 w-5">px</span>
+                      <div className="flex flex-col gap-0">
+                        <button
+                          onClick={() => {
+                            const current = Number(styles[key as keyof StyleState]) || 0;
+                            handleStyleChange(key as keyof StyleState, String(current + 1));
+                          }}
+                          className="text-xs text-gray-600 hover:text-gray-900 leading-none"
+                        >
+                          ▲
+                        </button>
+                        <button
+                          onClick={() => {
+                            const current = Number(styles[key as keyof StyleState]) || 0;
+                            handleStyleChange(key as keyof StyleState, String(Math.max(0, current - 1)));
+                          }}
+                          className="text-xs text-gray-600 hover:text-gray-900 leading-none"
+                        >
+                          ▼
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           )}
         </div>
 
