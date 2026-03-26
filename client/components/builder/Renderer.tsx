@@ -26,6 +26,8 @@ interface RendererProps {
   onDuplicate: (id: string) => void;
   onSelect?: (id: string) => void;
   isSelected?: boolean;
+  parentId?: string | null;
+  parentIndex?: number;
 }
 
 export const ComponentRenderer: React.FC<RendererProps> = ({
@@ -37,9 +39,16 @@ export const ComponentRenderer: React.FC<RendererProps> = ({
   onDuplicate,
   onSelect,
   isSelected,
+  parentId,
+  parentIndex,
 }) => {
   const handleCopyComponent = () => {
     onDuplicate(component.id);
+  };
+
+  const handleAddSibling = () => {
+    // Add as a sibling at the same level, not as a child
+    onAdd(component.type, parentId || null, (parentIndex || 0) + 1);
   };
 
   const [{ isDragging }, drag] = useDrag({
@@ -92,7 +101,7 @@ export const ComponentRenderer: React.FC<RendererProps> = ({
           component.type === "column" && "p-2 h-full flex flex-col gap-2",
         )}
       >
-        {component.children?.map((child) => (
+        {component.children?.map((child, childIndex) => (
           <ComponentRenderer
             key={child.id}
             component={child}
@@ -103,6 +112,8 @@ export const ComponentRenderer: React.FC<RendererProps> = ({
             onDuplicate={onDuplicate}
             onSelect={onSelect}
             isSelected={isSelected && component.id === child.id}
+            parentId={component.id}
+            parentIndex={childIndex}
           />
         ))}
         {component.children?.length === 0 && (
@@ -157,7 +168,7 @@ export const ComponentRenderer: React.FC<RendererProps> = ({
               className="h-6 w-6 hover:bg-valasys-orange/10"
               onClick={(e) => {
                 e.stopPropagation();
-                onAdd(component.type, component.id, component.children?.length || 0);
+                handleAddSibling();
               }}
               title="Add element"
             >

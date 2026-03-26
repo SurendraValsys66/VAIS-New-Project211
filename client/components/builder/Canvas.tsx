@@ -220,21 +220,23 @@ export const BuilderCanvas: React.FC<BuilderCanvasProps> = ({ onBack, templateId
           >
             {layout.length > 0 ? (
               <div className="space-y-4">
-                {layout.map((comp) => (
+                {layout.map((comp, index) => (
                   <ComponentRenderer
                     key={comp.id}
                     component={comp}
                     onUpdate={updateComponent}
                     onRemove={removeComponent}
                     onMove={moveComponent}
-                    onAdd={(type, parentId, index) => {
-                      addComponent(type, parentId, index, (newId) => {
+                    onAdd={(type, parentId, idx) => {
+                      addComponent(type, parentId, idx, (newId) => {
                         setSelectedComponentId(newId);
                       });
                     }}
                     onDuplicate={duplicateComponent}
                     onSelect={setSelectedComponentId}
                     isSelected={selectedComponentId === comp.id}
+                    parentId={null}
+                    parentIndex={index}
                   />
                 ))}
               </div>
