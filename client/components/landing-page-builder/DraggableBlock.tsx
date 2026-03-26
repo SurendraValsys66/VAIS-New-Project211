@@ -22,7 +22,6 @@ import {
   RowBlockPreview,
   ColumnBlockPreview,
 } from "./LayoutBlockPreviews";
-import { useResizable } from "./useResizable";
 
 interface DraggableBlockProps {
   block: LandingPageBlock;
@@ -74,8 +73,6 @@ export const DraggableBlock: React.FC<DraggableBlockProps> = ({
     }),
     [block.id]
   );
-
-  const { resizeHandles, blockSize } = useResizable(block, onUpdate);
 
   const getBlockPreview = (block: LandingPageBlock) => {
     const blockProps = {
@@ -145,20 +142,6 @@ export const DraggableBlock: React.FC<DraggableBlockProps> = ({
 
       {/* Block Content */}
       <div className="relative">{getBlockPreview(block)}</div>
-
-      {/* Resize Handles - Only show when selected and not dragging */}
-      {isSelected && !isDragging && (
-        <div className="absolute inset-0 pointer-events-none">
-          {resizeHandles.map((handle) => (
-            <div
-              key={handle.position}
-              className={`absolute w-2 h-2 bg-valasys-orange rounded-full pointer-events-auto cursor-${handle.cursor} ${handle.className}`}
-              onMouseDown={handle.onMouseDown}
-              title={`Resize ${handle.position}`}
-            />
-          ))}
-        </div>
-      )}
 
       {/* Controls */}
       {isSelected && (
