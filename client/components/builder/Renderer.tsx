@@ -555,6 +555,14 @@ export const ComponentRenderer: React.FC<RendererProps> = ({
     case "video": {
       const videoSource = component.videoUrl || component.props?.videoUrl || component.props?.src;
 
+      // Log for debugging (can be removed in production)
+      if (videoSource) {
+        console.log("Video source found:", {
+          componentId: component.id,
+          sourceType: videoSource.startsWith("data:") ? "data-url" : videoSource.includes("youtube") ? "youtube" : videoSource.includes("vimeo") ? "vimeo" : "direct-file",
+        });
+      }
+
       // Helper function to extract YouTube video ID
       const getYouTubeId = (url: string): string | null => {
         if (!url) return null;
